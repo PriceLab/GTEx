@@ -53,5 +53,16 @@ test_normalize <- function()
 
 } # test_normalize
 #------------------------------------------------------------------------------------------------------------------------
+# create and save matrices to be used by other packages and scripts
+createMatrices <- function()
+{
+   mtx.counts   <- createSubMatrix(gtex, "lung")
+   mtx.lung <- normalize(gtex, mtx.counts, "asinh")
+   checkTrue(all(mtx.lung >= 0))
+   checkEqualsNumeric(max(mtx.lung), 12.18, tol=0.1)
+   save(mtx.lung, file="~/tmp/mtx.lung.RData")
+
+} # createMatrices
+#------------------------------------------------------------------------------------------------------------------------
 if(!interactive())
    runTests()
