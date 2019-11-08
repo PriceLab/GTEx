@@ -17,6 +17,6 @@
 An invisible expression matrix
 }
 \description{
-Given a string which matches all or part of a GTEx tissue nmaeo, return the matrix sith geneSymbol
+Given a string which matches all or part of a GTEx tissue name, return the matrix sith geneSymbol
 names.
 }

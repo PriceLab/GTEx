@@ -3,6 +3,8 @@ misc/raw/
 .Rhistory
 .Rapp.history
 
+misc/prep/*.RData
+
 # Session Data files
 .RData
 

@@ -16,7 +16,8 @@
                   representation=representation(
                      state="environment",
                      matrix="matrix",
-                     metadata="data.frame"
+                     metadata="data.frame",
+                     quiet="logical"
                      ))
 
 #----------------------------------------------------------------------------------------------------
@@ -48,13 +49,13 @@ GTEx <- function(quiet=TRUE)
    tbl.md <- read.table(filename, sep="\t", nrow=-1, header=TRUE, as.is=TRUE, quote="")
    rownames(tbl.md) <- gsub("-", ".", tbl.md$SAMPID, fixed=TRUE)
 
-   .GTEx(state=state, matrix=mtx, metadata=tbl.md)
+   .GTEx(state=state, matrix=mtx, metadata=tbl.md, quiet=quiet)
 
 } # GTEx, the constructor
 #----------------------------------------------------------------------------------------------------
 #' create a tissue-specific expression matrix
 #'
-#' Given a string which matches all or part of a GTEx tissue nmaeo, return the matrix sith geneSymbol
+#' Given a string which matches all or part of a GTEx tissue name, return the matrix sith geneSymbol
 #' names.
 #'
 #' @param obj An instance of the GTEx class
@@ -74,9 +75,10 @@ setMethod('createSubMatrix', 'GTEx',
        tbl.md <- obj@metadata
        mtx <- obj@matrix
 
-       matching.tissue.names <- grep(tissueName, tbl.md$SMTSD, ignore.case=TRUE, value=TRUE)
-       print(table(matching.tissue.names))
-       tissue.rows <- grep(tissueName, tbl.md$SMTSD, ignore.case=TRUE)
+       matching.tissue.names <- grep(tissueName, tbl.md$SMTS, ignore.case=TRUE, value=TRUE)
+       if(!obj@quiet)
+          print(table(matching.tissue.names))
+       tissue.rows <- grep(tissueName, tbl.md$SMTS, ignore.case=TRUE)
        tissue.samples <- rownames(tbl.md)[tissue.rows]
 
        tissue.samples.with.expression <- intersect(tissue.samples, colnames(obj@matrix))
