@@ -1,7 +1,7 @@
 Package: GTEx
 Title: GTEx
-Date: 2019-11-08
-Version: 1.0.4
+Date: 2019-11-12
+Version: 1.0.5
 Author: Paul Shannon
 Maintainer: Paul Shannon <pshannon@systemsbiology.org>
 Description: Tools for exploring tissue-specific gene expression from the GTEx Project.
